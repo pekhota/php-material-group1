@@ -32,6 +32,7 @@ $data = [
 //}
 //include      __DIR__."/5-for-table-for.php1";
 require_once      __DIR__."/5-for-table-for.php";
+//$_SERVER['document_root']."/file"
 ?>
 
 adasdasd

@@ -1,43 +1,30 @@
-<h1>New Users</h1>
-
 <?php
 
-$sql = "SELECT * FROM users ORDER BY date_registered DESC";
-$result = mysql_query($sql) or die(mysql_error());
-?>
-<table class="my-table-class">
-<?php
-while($row = mysql_fetch_assoc($result)){
-    echo '<tr><td style="color: aquamarine">' . $row['username'] . '</td><td>' . $row['date_registered'] . '</td></tr>';
-}
-?>
-</table>
-<?php
-function random_custom_function($var){
-    $var = $var + 1;
-    return '<span style="font-weight:bold;">' . $var . '</span>';
+
+$arr = ["abc", "bcd", "cat", "dog", "mouse", "apple"];
+
+var_dump($arr);
+
+foreach ($arr as $k => $v) {
+    $arr[$k] = "elephant";
+//    $v = "elephant";
+//    var_dump($v);
 }
 
-$sql = "SELECT * FROM table WHERE column = 'test'";
-$result = mysql_query($sql) or die(mysql_error());
+var_dump($arr);
 
-?>
-
-<div id="test">
-<?php
-$i = 0;
-while($row = mysql_fetch_assoc($result)){
-    if($row['type'] == 3){
-        echo '<div style="margin-bottom:20px;">' . random_custom_function($row['val']) . '</div>';
-        $i++;
-    }
-    else{
-        echo '<div style="margin-bottom:20px;">' . $row['val'] . '</div>';
-    }
+foreach ($arr as &$v) {
+    // &$v => link => $arr[0]
+    // &$v => link => $arr[1]
+    // ...
+    // &$v => link => $arr[n] n=5
+    $v = "rat";
 }
 
-if($i == 0){
-    echo '<table>';
-    echo '<tr><td>Found none!</td></tr>';
-    echo '</table>';
-}
+unset($v);
+$v = 123;
+var_dump($arr);
+
+// summary
+// 1. с помощью $k => $v, когда мы меняем елемент массива с помощью обращения по индексу
+// 2. с помощью амперсанта & => ex &$v (не забываем подчищать потом переменную $v)
