@@ -1,10 +1,19 @@
-<?php
-$input = 11011;
-$reverse = strrev($input);
+class Solution {
 
-if($input == $reverse)
-echo ''.$input.' - palindrome';
+    /**
+     * @param Integer $x
+     * @return Boolean
+     */
+    function isPalindrome($x) {
+       
+$reverse = strrev($x);
 
-else
-echo ''.$input.' - not palendrom ';
-?>
+if($x == $reverse){
+return true;
+}
+else{
+return false;
+}
+    
+    }
+}
