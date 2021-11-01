@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 function isPalindromeRecursion(int $val, int $val1 = 0, int $val2 = 0): bool
 {
     if ($val < 0) {
