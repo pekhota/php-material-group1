@@ -9,7 +9,7 @@ function isPalindromeRecursion(int $val, int $val1 = 0, int $val2 = 0): bool
         return true;
     }
 
-    if ($val2 === 0) {
+    if ($val2 === 0 && $val1===0) {
         $val1 = $val;
     }
 
