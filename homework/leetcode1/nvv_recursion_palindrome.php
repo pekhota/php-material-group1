@@ -1,27 +1,27 @@
 <?php
-function isPalindromeRecursion(int $val, int $val1 = 0, int $val2 = 0, bool $isFirstCall = true): bool
+function isPalindromeRecursion(int $val, int $val1 = 0, int $val2 = 0): bool
 {
-    if ($isFirstCall) {
-        if ($val < 0) {
-            return false;
-        }
-        if ($val > -1 && $val < 10) {
-            return true;
-        }
-        $val1 = $val;
-        $isFirstCall = false;
+    if ($val < 0) {
+        return false;
     }
-    else{
-        if ($val1 === 0) {
-            return $val === $val2;
-        }
+
+    if ($val > -1 && $val < 10) {
+        return true;
+    }
+
+    if ($val2 === 0) {
+        $val1 = $val;
+    }
+
+    if ($val1 === 0) {
+        return $val === $val2;
     }
 
     $val2 *= 10;
     $val2 += ($val1 % 10);
     $val1 = intval($val1 / 10);
 
-    return isPalindromeRecursion($val, $val1, $val2, $isFirstCall);
+    return isPalindromeRecursion($val, $val1, $val2);
 }
 
 var_dump(isPalindromeRecursion(0));
