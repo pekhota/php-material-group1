@@ -16,7 +16,7 @@
             <li class="nav-item mb-2"><a href="/alexander-pekhota" class="nav-link p-0 text-muted">Pekhota page</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="/alexander-halych" class="nav-link p-0 text-muted">Halych page</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
             <li class="nav-item mb-2"><a href="/vadym-narchuk" class="nav-link p-0 text-muted">Narchuk page</a></li>
         </ul>
@@ -29,7 +29,7 @@
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+            <li class="nav-item mb-2"><a href="/vlad-petrovskiy" class="nav-link p-0 text-muted">petrovskiy page</a></li>
         </ul>
     </div>
 
