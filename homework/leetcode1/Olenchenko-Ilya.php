@@ -1,3 +1,4 @@
+<?php
 class Solution {
 
     /**
@@ -8,7 +9,7 @@ class Solution {
        
 $reverse = strrev($x);
 
-if($x == $reverse){
+if($x === $reverse){
 return true;
 }
 else{
@@ -17,3 +18,4 @@ return false;
     
     }
 }
+?>
