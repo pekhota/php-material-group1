@@ -18,7 +18,7 @@
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+            <li class="nav-item mb-2"><a href="/vadym-narchuk" class="nav-link p-0 text-muted">Narchuk page</a></li>
         </ul>
     </div>
 
