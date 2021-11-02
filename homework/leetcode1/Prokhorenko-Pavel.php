@@ -1,6 +1,8 @@
 <?php 
 
-function isPalindrome($x): bool {     
+declare(strict_types=1);
+
+function isPalindrome(int $x): bool {     
       
     $sx = strval($x);
     $sxLenth = strlen($sx);
