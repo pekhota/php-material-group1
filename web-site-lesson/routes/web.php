@@ -5,37 +5,61 @@ const HTTP_POST = "POST";
 
 return [
     "/" => [ // main
-        "method" => HTTP_GET,
-        "handler" => function():string {
-            return loadView(__DIR__ . "/../app/views/hero.php");
-        },
+        HTTP_GET => [
+            "handler" => function():string {
+                return loadView(__DIR__ . "/../app/views/hero.php");
+            },
+        ]
     ],
     "/news" => [
-        "method" => HTTP_GET,
-        "handler" => function() use ($dbh):string {
-            // новая область видимости
+        HTTP_GET => [
+            "handler" => function() use ($dbh):string {
+                // новая область видимости
 
-            $news = [];
-            foreach($dbh->query('SELECT * from news') as $row) {
-                $news[] = $row;
+                $news = [];
+                foreach($dbh->query('SELECT * from news') as $row) {
+                    $news[] = $row;
+                }
+
+                return loadView(__DIR__ . "/../app/views/news.php", [
+                    "news" => $news
+                ]);
             }
+        ],
+    ],
+    "/signup" => [
+        HTTP_GET => [
+            "layout" => __DIR__."/../app/layouts/signup.php",
+            "handler" => function() {
+                return loadView(__DIR__ . "/../app/views/signup.php");
+            }
+        ],
+        HTTP_POST => [
+            "handler" => function() use ($dbh) {
+                $stmt = $dbh->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+                $stmt->bindParam(':email', $_POST["email"]);
+                $stmt->bindParam(':password', $_POST["password"]);
 
-            return loadView(__DIR__ . "/../app/views/news.php", [
-                "news" => $news
-            ]);
-        }
+                $stmt->execute();
 
+                header("HTTP/1.1 301 Moved Permanently");
+                header("Location: /");
+                exit();
+            }
+        ]
     ],
     "/pricing" => [
-        "method" => HTTP_GET,
-        "handler" => function():string {
-            return loadView(__DIR__ . "/../app/views/pricing.php");
-        },
+        HTTP_GET => [
+            "handler" => function():string {
+                return loadView(__DIR__ . "/../app/views/pricing.php");
+            },
+        ]
     ],
     "/masonry" => [
-        "method" => HTTP_GET,
-        "handler" => function():string {
-            return loadView(__DIR__ . "/../app/views/masonry.php");
-        },
+        HTTP_GET => [
+            "handler" => function():string {
+                return loadView(__DIR__ . "/../app/views/masonry.php");
+            },
+        ]
     ]
 ];

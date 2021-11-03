@@ -1,0 +1,3 @@
+[2021-11-03 18:25:11] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'step-group1.news' doesn't exist
+[2021-11-03 18:25:17] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'step-group1.news' doesn't exist
+[2021-11-03 18:25:21] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'step-group1.news' doesn't exist
