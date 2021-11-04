@@ -9,6 +9,15 @@ function dd($var) {
     die();
 }
 
+/**
+ * @param string $path
+ */
+function redirect301(string $path) {
+    header("HTTP/1.1 301 Moved Permanently");
+    header(sprintf("Location: %s", $path));
+    exit();
+}
+
 function loadView(string $path, array $params = null) {
     if (!empty($params)) {
         extract($params);

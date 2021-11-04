@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,11 +6,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Signin Template · Bootstrap v5.1</title>
+    <title><?= $title ?></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
-
-
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -41,32 +38,10 @@
             }
         }
     </style>
-
-
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/5.1/examples/sign-in/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
-
-<main class="form-signin">
-    <form action="/signup" method="post">
-        <img class="mb-4" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-
-        <div class="form-floating">
-            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-            <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-    </form>
-</main>
-
-
-
+<?= $content ?>
 </body>
 </html>
