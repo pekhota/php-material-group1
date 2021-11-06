@@ -1,3 +1,12 @@
+<style>
+    .user{
+        text-decoration: none;
+        color: black;
+        border-radius: 50px;
+        margin-right: 10px;
+    }
+</style>
+
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
@@ -15,8 +24,9 @@
         <?php
             if (!empty($_SESSION["user"])) {
                 ?>
-                <a href="/user">
-                    <img src="https://w7.pngwing.com/pngs/811/233/png-transparent-computer-icons-user-login-desktop-others-blue-computer-prints.png" width="38" height="30" class="me-3" alt="Bootstrap">
+                <a href="/user" class="user">
+                    <?=$_SESSION["user"]["email"]?>
+                    <img class="user" src="https://w7.pngwing.com/pngs/811/233/png-transparent-computer-icons-user-login-desktop-others-blue-computer-prints.png" width="38" height="30" class="me-3" alt="Bootstrap">
                 </a>
                 <a href="/logout" type="button" class="btn btn-primary">Logout</a>
                 <?php
