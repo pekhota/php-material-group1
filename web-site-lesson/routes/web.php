@@ -31,10 +31,10 @@ return [
         HTTP_POST => [
             "handler" => function() use ($dbh) {
                 try {
-                    $title = $_POST["title"] ?? throw new ValidateException("title is empty");
-                    $date = $_POST["date"] ?? throw new ValidateException("date is empty");
-                    $author = $_POST["author"] ?? throw new ValidateException("author is empty");
-                    $body = $_POST["body"] ?? throw new ValidateException("body is empty");
+                    $title = $_POST["title"] ?: throw new ValidateException("title is empty");
+                    $date = $_POST["date"] ?: throw new ValidateException("date is empty");
+                    $author = $_POST["author"] ?: throw new ValidateException("author is empty");
+                    $body = $_POST["body"] ?: throw new ValidateException("body is empty");
 
                     $stmt = $dbh->prepare("
                         INSERT INTO news (title, date, author, body) 
@@ -54,6 +54,10 @@ return [
             }
         ]
     ],
+
+
+
+
     "/signup" => [
         HTTP_GET => [
             "layout" => __DIR__."/../app/layouts/login.php",
@@ -63,8 +67,8 @@ return [
             "handler" => function() use ($dbh) {
                 try {
                     // редиректнуть на страницу авторизации
-                    $email = $_POST["email"] ?? throw new ValidateException("email is empty");
-                    $password = $_POST["password"] ?? throw new ValidateException("password is empty");
+                    $email = $_POST["email"] ?: throw new ValidateException("email is empty");
+                    $password = $_POST["password"] ?: throw new ValidateException("password is empty");
 
 
                     $stmt = $dbh->prepare("SELECT * FROM users WHERE email=?");
@@ -109,10 +113,13 @@ return [
             "layout" => __DIR__."/../app/layouts/login.php",
             "handler" => fn() => loadView(__DIR__ . "/../app/views/login.php")
         ],
+
         HTTP_POST => [
             "handler" => function() use ($dbh) {
-                $email = $_POST["email"] ?? throw new ValidateException("email is empty");
-                $password = $_POST["password"] ?? throw new ValidateException("password is empty");
+
+            try{
+                $email = $_POST["email"] ?: throw new ValidateException("email is empty");
+                $password = $_POST["password"] ?: throw new ValidateException("password is empty");
 
                 // запрос к базе данных
                 $stmt = $dbh->prepare("SELECT * FROM users WHERE email=?");
@@ -133,15 +140,23 @@ return [
                 ];
 
                 redirect301("/user");
+                
+            }catch (ValidateException $e) {
+                echo $e->getMessage();
+                die();
+            }
+ 
 
-                //
+
+            }
+            ]
+            //
 
                 // проверить что пользователь существует +
                 // проверяем что пароль совпадает +
                 // редиректим пользователя на приватную страницу
-            }
-        ]
     ],
+
     "/pricing" => [
         HTTP_GET => [
             "handler" => function():string {
@@ -149,11 +164,68 @@ return [
             },
         ]
     ],
+
+
     "/masonry" => [
-        HTTP_GET => [
-            "handler" => function():string {
-                return loadView(__DIR__ . "/../app/views/masonry.php");
-            },
+            HTTP_GET => [
+
+                "handler" => function() use ($dbh):string {
+
+                $masonry = [];
+                            
+                    foreach($dbh->query('SELECT * from masonry ORDER BY id DESC') as $row) {
+                        $masonry[] = $row;
+                    }
+                    
+
+                    return loadView(__DIR__ . "/../app/views/masonry.php", [
+                        "masonry" => $masonry
+                    ]);
+            
+                },
+            ],
+            HTTP_POST => [
+                "handler" => function() use ($dbh) {
+                    try {
+                    
+                        $title = $_POST["title"] ?: throw new ValidateException("title is empty");
+                        $image = $_POST["image"] ?: throw new ValidateException("image is empty");                       
+                        $text = $_POST["text"] ?: throw new ValidateException("text is empty");
+                        $author = $_SESSION["user"]["email"] ?: throw new ValidateException("author is empty");
+
+                        $author = strtok($author, '@');
+                        
+                        $stmt = $dbh->prepare("
+                            INSERT INTO masonry (title, image, text,autor,data) 
+                            VALUES (:title, :image, :text, :autor,CURDATE())");
+                        $stmt->bindParam(':title', $title);
+                        $stmt->bindParam(':image', $image);
+                        $stmt->bindParam(':text', $text);
+                        $stmt->bindParam(':autor', $author);                    
+                                   
+
+                        $stmt->execute();
+                    
+                        
+                       redirect301("/masonry");
+
+                    } catch (ValidateException $e) {
+                        echo $e->getMessage();
+                        die();
+                    }
+                }
+            ]
+        ],
+
+
+        "/fillmasonry" => [
+            HTTP_GET => [
+                "handler" => function():string {
+                    return loadView(__DIR__ . "/../app/views/fillmasonry.php");
+                },                      
+            ],    
         ]
-    ]
+      
+
+
 ];
