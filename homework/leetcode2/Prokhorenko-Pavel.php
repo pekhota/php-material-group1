@@ -18,22 +18,25 @@ declare(strict_types=1);
         $lres = new ListNode(0);   
         $curr = $lres;
         $sum = 0;
-        
-           while ($l1 != null || $l2 != null) {
+        $l1temp = $l1;
+        $l2temp = $l2;
+
+
+           while ($l1temp != null || $l2temp != null) {
               
             $x = 0;
             $y = 0;
                
-            if($l1 !== null) $x = $l1->val;
-            if($l2 !== null) $y = $l2->val;
+            if($l1temp !== null) $x = $l1temp->val;
+            if($l2temp !== null) $y = $l2temp->val;
                  
              $sum = $sum + $x + $y;
                          
             $curr->next = new ListNode($sum % 10);
             $sum = intval($sum/10);
             $curr = $curr->next;
-                if ($l2 !== null) $l2 = $l2->next;
-                if ($l1 !== null) $l1 = $l1->next;
+                if ($l2temp !== null) $l2temp = $l2temp->next;
+                if ($l1temp !== null) $l1temp = $l1temp->next;
                
             }
         
@@ -67,5 +70,3 @@ $l2->next->next = new ListNode(4);
 $s = new Solution();
 
 show($s->addTwoNumbers($l1,$l2));
-
-
