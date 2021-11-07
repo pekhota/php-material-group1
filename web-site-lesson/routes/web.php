@@ -15,7 +15,7 @@ return [
     ],
     "/news" => [
         HTTP_GET => [
-            "handler" => function() use ($dbh):string {
+            "handler" => function() use ($dbh) {
                 // новая область видимости
 
                 $news = [];
@@ -47,6 +47,7 @@ return [
                     $stmt->execute();
 
                     redirect301("/news");
+
                 } catch (ValidateException $e) {
                     echo $e->getMessage();
                     die();
@@ -102,7 +103,6 @@ return [
                 redirect301("/");
             }
         ]
-
     ],
     "/login" => [
         HTTP_GET => [
@@ -151,9 +151,49 @@ return [
     ],
     "/masonry" => [
         HTTP_GET => [
-            "handler" => function():string {
-                return loadView(__DIR__ . "/../app/views/masonry.php");
+            "handler" => function() use ($dbh) {
+                $bricks = [];
+                foreach($dbh->query('SELECT * from bricks ORDER BY id DESC') as $row) {
+                   $bricks[] = $row;
+                }
+
+                return loadView(__DIR__ . "/../app/views/masonry.php", [
+                   "bricks" => $bricks
+                ]);
             },
+        ],
+        HTTP_POST => [
+            "handler" => function() use ($dbh) {
+                try {
+                    $title = $_POST["title"] ?? throw new ValidateException("title is empty");
+                    $date = $_POST["date"] ?? throw new ValidateException("date is empty");
+                    $body = $_POST["body"] ?? throw new ValidateException("body is empty");
+                    $picture = $_POST["picture"] ?? throw new ValidateException("picture is empty");
+
+                    $stmt = $dbh->prepare("
+                        INSERT INTO bricks (title, date, body, picture) 
+                        VALUES (:title, :date, :body, :picture)");
+                    $stmt->bindParam(':title', $title);
+                    $stmt->bindParam(':date', $date);
+                    $stmt->bindParam(':body', $body);
+                    $stmt->bindParam(':picture', $picture);
+
+                    $stmt->execute();
+
+                    redirect301("/masonry");
+
+                } catch (ValidateException $e) {
+                    echo $e->getMessage();
+                    die();
+                }
+            }
+        ]
+    ],
+    "/brick" => [
+        HTTP_GET => [
+            "handler" => function() {
+                return loadView(__DIR__."/../app/views/brick.php");
+            }
         ]
     ]
 ];
