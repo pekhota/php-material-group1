@@ -14,6 +14,7 @@
         <h5>Section</h5>
         <ul class="nav flex-column">
             <li class="nav-item mb-2"><a href="/alexander-pekhota" class="nav-link p-0 text-muted">Pekhota page</a></li>
+            <li class="nav-item mb-2"><a href="/sergey-golub" class="nav-link p-0 text-muted">Golub page</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
             <li class="nav-item mb-2"><a href="/alexander-halych" class="nav-link p-0 text-muted">Halych page</a></li>
