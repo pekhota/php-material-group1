@@ -155,5 +155,51 @@ return [
                 return loadView(__DIR__ . "/../app/views/masonry.php");
             },
         ]
+    ],
+    "/vadym-narchuk"=>[
+        HTTP_GET=>[
+            "handler" => function() use ($dbh):string{
+                $masonry = [];
+                foreach ($dbh->query('SELECT * from masonry ORDER BY id DESC') as $row){
+                    $masonry[] = $row;
+                }
+                return loadView(__DIR__ . "/../app/views/masonry_narchuk.php",[
+                    "masonry" => $masonry
+                ]);
+            }
+        ],
+        HTTP_POST => [
+            "handler" => function() use ($dbh) {
+                try {
+                    if(!array_key_exists('user',$_SESSION)){
+                        redirect301("/login");
+
+                    }
+
+                    $link = $_POST["link"] ?? throw new ValidateException("link is empty");
+                    $name = $_POST["name"] ?? throw new ValidateException("name is empty");
+                    $title = $_POST["title"] ?? throw new ValidateException("title is empty");
+                    $text = $_POST["text"] ?? throw new ValidateException("text is empty");
+                    $author = $_SESSION["user"]["email"];
+
+
+                    $stmt = $dbh->prepare("
+                        INSERT INTO masonry (link, name, title, text,author) 
+                        VALUES (:link, :name, :title, :text, :author)");
+                    $stmt->bindParam(':link', $link);
+                    $stmt->bindParam(':name', $name);
+                    $stmt->bindParam(':title', $title);
+                    $stmt->bindParam(':text', $text);
+                    $stmt->bindParam(':author', $author);
+
+                    $stmt->execute();
+
+                    redirect301("/vadym-narchuk");
+                } catch (ValidateException $e) {
+                    echo $e->getMessage();
+                    die();
+                }
+            }
+        ]
     ]
 ];
