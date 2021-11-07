@@ -50,4 +50,4 @@
     foreach (addTwoNumbers([0],[5,6,4]) as $i){
         printf(" %d ", $i);
     };
-    //    блок-тест
+     //    блок-тест
