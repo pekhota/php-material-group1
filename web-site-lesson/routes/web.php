@@ -155,5 +155,18 @@ return [
                 return loadView(__DIR__ . "/../app/views/masonry.php");
             },
         ]
+    ],
+    "/vadym-narchuk"=>[
+        HTTP_GET=>[
+            "handler" => function() use ($dbh):string{
+                $masonry = [];
+                foreach ($dbh->query('SELECT * from masonry ORDER BY id DESC') as $row){
+                    $masonry[] = $row;
+                }
+                return loadView(__DIR__."/../../homework/homework-11/narchuk_vadym/masonry.php",[
+                    "masonry" => $masonry
+                ]);
+            }
+        ]
     ]
 ];
