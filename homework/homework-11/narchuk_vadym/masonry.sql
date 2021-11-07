@@ -10,7 +10,7 @@ SET NAMES utf8mb4;
 DROP TABLE IF EXISTS `masonry`;
 CREATE TABLE `masonry` (
                            `id` int(11) NOT NULL AUTO_INCREMENT,
-                           `link` text NOT NULL,
+                           `link` varchar(2048) NOT NULL,
                            `name` varchar(255) NOT NULL,
                            `title` varchar(255) NOT NULL,
                            `text` varchar(255) NOT NULL,
