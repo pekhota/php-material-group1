@@ -4,12 +4,12 @@
 <!--            From the Firehose-->
 <!--        </h3>-->
         <?php
-            foreach ($news as $s) {
+        foreach ($news as $s) {
         ?>
                 <article class="blog-post">
 
                     <h2 class="blog-post-title"><?=$s["title"]?></h2>
-                    <p class="blog-post-meta"><?=$s["date"]?> by <a href="#"><?=$s['author']?>></a></p>
+                    <p class="blog-post-meta"><?=$s["date"]?> by <a href="#"><?=$s['author']?></a></p>
 
                     <p><?=$s['body']?></p>
                     <hr>
