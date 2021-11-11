@@ -20,12 +20,11 @@
 </head>
 <body>
 <div class="container">
-    <?= $header ?>
+    <?= loadView(__DIR__."/../views/header.php") ?>
 
     <?= $content ?>
 
-    <?= $footer ?>
-
+    <?= loadView(__DIR__."/../views/footer.php") ?>
 </div>
 
 <!-- Optional JavaScript; choose one of the two! -->
