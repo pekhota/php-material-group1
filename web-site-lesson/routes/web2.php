@@ -8,7 +8,8 @@ class ValidateException extends Exception {
 }
 
 
-return [
+return 
+[
 //    "/" => [ // main
 //        HTTP_GET => [
 //            "handler" => fn() => loadView(__DIR__ . "/../app/views/hero.php")
@@ -57,7 +58,7 @@ return [
 //                }
 //            }
 //        ]
-//    ],
+     ],
     "/signup" => [
         HTTP_GET => [
             "layout" => __DIR__."/../app/layouts/login.php",
@@ -160,4 +161,6 @@ return [
             },
         ]
     ]
-];
+        ];
+
+        
