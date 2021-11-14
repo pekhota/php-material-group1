@@ -15,7 +15,7 @@
         <?php
             if (!empty($_SESSION["user"])) {
                 ?>
-                <a href="/user">
+                <a href="/adminpanel/news">
                     <img src="https://w7.pngwing.com/pngs/811/233/png-transparent-computer-icons-user-login-desktop-others-blue-computer-prints.png" width="38" height="30" class="me-3" alt="Bootstrap">
                 </a>
                 <a href="/logout" type="button" class="btn btn-primary">Logout</a>

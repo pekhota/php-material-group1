@@ -28,6 +28,7 @@ class Response
     public function __construct(string $content)
     {
         $this->content = $content;
+     
     }
 
     public function render()
@@ -41,4 +42,11 @@ class Response
     public function setLayoutPath($path) {
         $this->layoutPath = $path;
     }
+    // public function getLayoutPath():string {
+    //     return $this->layoutPath;
+    // }
+    public function LayoutPathisNull():bool {
+       return empty($this->layoutPath);
+    }
+
 }

@@ -64,8 +64,9 @@ class Application
             // $route => "/^\/news\/(\d+)$/"
             // /news/13123133
             $matches = [];
+           
             $res = preg_match($route, $path, $matches);
-
+    
             if ($res > 0) {
                 if (array_key_exists($request->getMethod(), $v)) {
                     $routeData = $v[$request->getMethod()];
@@ -74,8 +75,8 @@ class Application
                     list($handlerClass, $handlerMethod) = explode("😋", $handler);
 
                     $callableClass = new $handlerClass($this);
-
-                    $funcParams = array_splice($matches, 1);
+                 
+                    $funcParams = array_splice($matches, 1);          
 
                     try {
                         /** @var Response $response */
@@ -88,9 +89,14 @@ class Application
                         // 500 ошибка сервера
                         echo $e->getMessage();
                         die();
+                    }              
+                    //$response->setLayoutPath();
+                    if($response->LayoutPathisNull()){
+                       $response->setLayoutPath($this->get("config")->get('app.layout'));
                     }
-
-                    $response->setLayoutPath($this->get("config")->get('app.layout'));
+                        
+                   
+                   
                     return $response;
                 }
             }
@@ -98,7 +104,7 @@ class Application
 
         dd("404 not found");
 
-        return new Response();
+        return new Response("/../app/views/404.php");
     }
 
     public function terminate()

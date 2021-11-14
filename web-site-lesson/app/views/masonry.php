@@ -48,17 +48,20 @@
 
       
 <?php
+         /**
+         * @var Masonry[] $masonry
+         */
             foreach ($masonry as $m) {
         ?>
   <div class="grid-item" style="border-radius: 40px;">
     <div class="card">
        
-        <img style="border-radius: 10px;" src=<?=$m["image"]?>>
+        <img style="border-radius: 10px;" src=<?=$m->image?>>
 
         <div class="card-body">
-                    <h5 class="card-title"><?=$m["title"]?></h5>
-                    <p class="card-text"><?=$m["text"]?></p>
-                    <p class="autortxt">Autor: <?=$m["autor"]?><br>Data: <?=$m["data"]?></p>
+                    <h5 class="card-title"><?=$m->title?></h5>
+                    <p class="card-text"><?=$m->text?></p>
+                    <p class="autortxt">Autor: <?=$m->author?><br>Data: <?=$m->data?></p>
                     
 
                 </div>

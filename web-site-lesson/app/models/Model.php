@@ -51,4 +51,19 @@ abstract class Model
         }
         return $model;
     }
+
+    public static function delete($id) {
+     //   try{
+        $model = new static();
+        $table = $model->getTable();
+        $db = Application::getApp()->get('db')->getConnection();
+        $stmt = $db->prepare("DELETE FROM {$table} WHERE id = ?");
+        $stmt->execute([$id]);
+             
+        // return 0;
+        // }catch(Exception $e){
+        //      echo $e->getMessage();
+        //      return 1;
+        // }
+    }
 }
