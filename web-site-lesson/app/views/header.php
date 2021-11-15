@@ -4,7 +4,14 @@
     </a>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <?php
+            if(!empty($_SESSION["user"])){
+                ?>
+                <li><a href="/admin" class="nav-link px-2 link-secondary">Admin panel</a></li>
+            <?php }
+        ?>
+
+        <li><a href="/news" class="nav-link px-2 link-secondary">Home</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
@@ -22,8 +29,8 @@
                 <?php
             } else {
                 ?>
-                <a href="/login" type="button" class="btn btn-primary">Login</a>
-                <a href="/signup" type="button" class="btn btn-primary">Sign-up</a>
+                <a href="/login-start" type="button" class="btn btn-primary">Login</a>
+                <a href="/signup-start" type="button" class="btn btn-primary">Sign-up</a>
                 <?php
             }
         ?>

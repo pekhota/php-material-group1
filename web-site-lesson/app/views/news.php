@@ -12,7 +12,7 @@
                 <article class="blog-post">
 
                     <h2 class="blog-post-title"><?=$s->title?></h2>
-                    <p class="blog-post-meta"><?=$s->date?> by <a href="#"><?=$s->author?>></a></p>
+                    <p class="blog-post-meta"><?=$s->date?> by <a href="/<?=$s->author?>/"><?=$s->author?>></a></p>
 
                     <p><?=$s->body?></p>
                     <hr>

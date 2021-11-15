@@ -1,3 +1,22 @@
+
+<?php
+/**
+ * @var News[] $news
+ */
+foreach ($news as $s) {
+    ?>
+    <article class="blog-post">
+
+        <h2 class="blog-post-title"><?=$s->title?></h2>
+        <p class="blog-post-meta"><?=$s->date?> by <a href="/<?=$s->author?>/"><?=$s->author?>></a></p>
+
+        <p><?=$s->body?></p>
+        <hr>
+    </article>
+    <?php
+}
+?>
+
 <div class="row" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative; height: 690px;">
     <div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">
         <div class="card">

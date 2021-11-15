@@ -7,7 +7,7 @@ class Route
     public const HTTP_GET = "GET";
     public const HTTP_POST = "POST";
 
-    private static $routes = array();
+    private static array $routes = array();
 
     /*
      *  Route::get($uri, $callback);
@@ -22,7 +22,7 @@ class Route
         self::route(self::HTTP_GET, $route, $cb);
     }
 
-    public static function post(string $route, callable $cb) : void {
+    public static function post(string $route,  $cb) : void {
         self::route(self::HTTP_POST, $route, $cb);
     }
 
@@ -35,4 +35,5 @@ class Route
     public static function getAllRoutes() : array {
         return self::$routes;
     }
+
 }

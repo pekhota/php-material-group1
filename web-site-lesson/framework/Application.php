@@ -55,8 +55,12 @@ class Application
     public function handle(Request $request) : Response {
 
         $path = $request->getPath();
+        if (preg_match("/@/", $path)){
+            $path="0@0_0";
+        }
 
         $this->add("request", $request);
+
 
         $routes = Route::getAllRoutes();
 
@@ -64,7 +68,9 @@ class Application
             // $route => "/^\/news\/(\d+)$/"
             // /news/13123133
             $matches = [];
+
             $res = preg_match($route, $path, $matches);
+
 
             if ($res > 0) {
                 if (array_key_exists($request->getMethod(), $v)) {

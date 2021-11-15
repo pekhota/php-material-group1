@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+use JetBrains\PhpStorm\NoReturn;
+
 function d($var) {
     echo "<pre>";
     var_dump($var);
     echo "</pre>";
 }
 
-function dd($var) {
+#[NoReturn] function dd($var) {
     d($var);
     die();
 }
@@ -16,13 +18,14 @@ function dd($var) {
 /**
  * @param string $path
  */
-function redirect301(string $path) {
+#[NoReturn] function redirect301(string $path) {
     header("HTTP/1.1 301 Moved Permanently");
     header(sprintf("Location: %s", $path));
     exit();
 }
 
-function loadView(string $path, array $params = null) {
+function loadView(string $path, array $params = null): bool|string
+{
     if (!empty($params)) {
         extract($params);
     }
@@ -33,7 +36,9 @@ function loadView(string $path, array $params = null) {
     return $content;
 }
 
-spl_autoload_register(function ($className) {
+spl_autoload_register(/**
+ * @throws ClassNotFoundException
+ */ function ($className) {
 
     if (file_exists(sprintf(__DIR__."/../framework/%s.php", $className))) {
         require_once sprintf(__DIR__."/../framework/%s.php", $className);
@@ -53,6 +58,10 @@ spl_autoload_register(function ($className) {
 
     if (file_exists(sprintf(__DIR__."/../framework/ServiceProviders/%s.php", $className))) {
         require_once sprintf(__DIR__."/../framework/ServiceProviders/%s.php", $className);
+        return ;
+    }
+    if (file_exists(sprintf(__DIR__."/../framework/Exceptions/%s.php", $className))) {
+        require_once sprintf(__DIR__."/../framework/Exceptions/%s.php", $className);
         return ;
     }
 
