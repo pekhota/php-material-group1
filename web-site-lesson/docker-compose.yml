@@ -24,10 +24,10 @@ services:
       MYSQL_DATABASE: step-group1
       MYSQL_ROOT_PASSWORD: example
     ports:
-      - 3306:3306
+      - "3306:3306"
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8090:8080 # http://localhost:8090   user:root, password: example
+      - "8090:8080" # http://localhost:8090   user:root, password: example

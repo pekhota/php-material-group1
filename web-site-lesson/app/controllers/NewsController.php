@@ -1,10 +1,13 @@
 <?php
 
+use JetBrains\PhpStorm\NoReturn;
+
 final class NewsController extends AbstractController
 {
-    public function index() {
+    public function index(): Response
+    {
 
-        $result = News::findAll();
+        $result = News::selectAll();
 
         $content = loadView(__DIR__ . "/../../app/views/news.php", [
             "news" => $result
@@ -15,7 +18,8 @@ final class NewsController extends AbstractController
         return $r;
     }
 
-    public function get($id) {
+    public function get($id): Response
+    {
 
         /** @var News $model */
         $model = News::findByPk($id);
@@ -31,31 +35,37 @@ final class NewsController extends AbstractController
     }
 
 
-    public function post() {
-        /** @var PDO $db */
-        $db = $this->app->get('db')->getConnection();
+    /**
+     * @throws ValidateException
+     */
+    #[NoReturn] public function post() {
 
         /** @var Request $request */
         $request = $this->app->get('request');
 
+
         // validation block
         $title = $request->post('title');
         $date = $request->post('date');
-        $author = $request->post('author');
-        $body = $request->post('body');
+        $author = $request->getUser();
+        $body = $request->post('fragment');
 
-        // business logic
-        $stmt = $db->prepare("
-                        INSERT INTO news (title, date, author, body) 
-                        VALUES (:title, :date, :author, :body)");
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':date', $date);
-        $stmt->bindParam(':author', $author);
-        $stmt->bindParam(':body', $body);
-
-        $stmt->execute();
+        News::insert($title,$date,$body,$author);
 
         // view
-        redirect301("/news");
+        redirect301("/admin");
+    }
+
+
+    #[NoReturn] public function delete($id) {
+        /** @var Request $req */
+        $req = $this->app->get("request");
+        $user = User::findByColumn("email",$req->getUser(),new User());
+        if(!$user !== null && $user->isSetAttributes()){
+            News::delete($id);
+            redirect301("/admin");
+        }
+
+        redirect301("/login-start");
     }
 }

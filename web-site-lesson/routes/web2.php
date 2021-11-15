@@ -2,10 +2,10 @@
 
 const HTTP_GET = "GET";
 const HTTP_POST = "POST";
-
-class ValidateException extends Exception {
-
-}
+//
+//class ValidateException extends Exception {
+//
+//}
 
 
 return [
@@ -58,40 +58,40 @@ return [
 //            }
 //        ]
 //    ],
-    "/signup" => [
-        HTTP_GET => [
-            "layout" => __DIR__."/../app/layouts/login.php",
-            "handler" => fn() => loadView(__DIR__ . "/../app/views/signup.php")
-        ],
-        HTTP_POST => [
-            "handler" => function() use ($dbh) {
-                try {
-                    // редиректнуть на страницу авторизации
-                    $email = $_POST["email"] ?? throw new ValidateException("email is empty");
-                    $password = $_POST["password"] ?? throw new ValidateException("password is empty");
-
-
-                    $stmt = $dbh->prepare("SELECT * FROM users WHERE email=?");
-                    $stmt->execute([$email]);
-                    $user = $stmt->fetch();
-
-                    !$user ?: throw new ValidateException("User exist");
-
-                    $passwordHashed = hash("sha256", $password);
-
-                    $stmt = $dbh->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
-                    $stmt->bindParam(':email', $email);
-                    $stmt->bindParam(':password', $passwordHashed);
-                    $stmt->execute();
-
-                    redirect301("/login");
-                } catch (ValidateException $e) {
-                    echo $e->getMessage();
-                    die();
-                }
-            }
-        ]
-    ],
+//    "/signup" => [
+//        HTTP_GET => [
+//            "layout" => __DIR__."/../app/layouts/login.php",
+//            "handler" => fn() => loadView(__DIR__ . "/../app/views/signup.php")
+//        ],
+//        HTTP_POST => [
+//            "handler" => function() use ($dbh) {
+//                try {
+//                    // редиректнуть на страницу авторизации
+//                    $email = $_POST["email"] ?? throw new ValidateException("email is empty");
+//                    $password = $_POST["password"] ?? throw new ValidateException("password is empty");
+//
+//
+//                    $stmt = $dbh->prepare("SELECT * FROM users WHERE email=?");
+//                    $stmt->execute([$email]);
+//                    $user = $stmt->fetch();
+//
+//                    !$user ?: throw new ValidateException("User exist");
+//
+//                    $passwordHashed = hash("sha256", $password);
+//
+//                    $stmt = $dbh->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+//                    $stmt->bindParam(':email', $email);
+//                    $stmt->bindParam(':password', $passwordHashed);
+//                    $stmt->execute();
+//
+//                    redirect301("/login");
+//                } catch (ValidateException $e) {
+//                    echo $e->getMessage();
+//                    die();
+//                }
+//            }
+//        ]
+//    ],
     "/user" => [ // <--------------
         HTTP_GET => [
             "handler" => function() {
@@ -99,15 +99,15 @@ return [
             }
         ]
     ],
-    "/logout" => [
-        HTTP_GET => [
-            "handler" => function() {
-                $_SESSION = [];
-                redirect301("/");
-            }
-        ]
-
-    ],
+//    "/logout" => [
+//        HTTP_GET => [
+//            "handler" => function() {
+//                $_SESSION = [];
+//                redirect301("/");
+//            }
+//        ]
+//
+//    ],
     "/login" => [
         HTTP_GET => [
             "layout" => __DIR__."/../app/layouts/login.php",

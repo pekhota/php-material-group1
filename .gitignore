@@ -1,1 +1,6 @@
 /vendor/
+/my_test/*.php
+/my_test/
+/syntax/
+/homework/
+/lecture-content/

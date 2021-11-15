@@ -4,7 +4,7 @@ class Request
 {
     private string $scheme;
     private string $host;
-    private int    $port;
+    private int $port;
     private string $user;
     private string $pass;
     private string $path;
@@ -18,13 +18,18 @@ class Request
     private array $post;
     private array $input;
 
+    private bool $isValidUser;
+    private User $client;
+
     public function __construct()
     {
 
     }
 
-    public static function capture() {
+    public static function capture(): Request
+    {
         $parsedUrl = parse_url(
+
             sprintf("%s://%s%s", $_SERVER['REQUEST_SCHEME'], $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'])
         );
 
@@ -40,8 +45,32 @@ class Request
         $req->setScheme($parsedUrl['scheme']);
         $req->setHost($parsedUrl['host']);
         $req->setPort($parsedUrl['port']);
-//        $req->setUser(@$parsedUrl['user']);
-//        $req->setPass(@$parsedUrl['pass']);
+
+
+        try {
+            if (isset($_SESSION["user"]["email"]) && isset($_SESSION["user"]["pass"]) && isset($_COOKIE["user"])) {
+                $var1 = $_SESSION["user"]["email"];
+                $var2 = $_SESSION["user"]["pass"];
+
+                list($email, $pass) = explode("-", $_COOKIE["user"]);
+
+                if ($var1 === $email && $var2 === $pass) {
+                    $req->setUser($var1);
+                    $req->setPass($var2);
+                    $user = User::findByColumn("email",$req->getUser(),new User());
+                    if(!$user !== null && $user->isSetAttributes()){
+                        $req->setIsValidUser(true);
+                        $req->setClient($user);
+                    }
+                    else{
+                        $req->setIsValidUser(false);
+                    }
+                }
+            }
+            else{$req->setIsValidUser(false);}
+        } catch (Exception){$req->setIsValidUser(false);}
+
+
         $req->setPath($parsedUrl['path']);
 //        $req->setQuery($parsedUrl['query']);
 //        $req->setFragment($parsedUrl['fragment']);
@@ -253,4 +282,38 @@ class Request
     {
         $this->input = $input;
     }
+
+    /**
+     * @return bool
+     */
+    public function isValidUser(): bool
+    {
+        return $this->isValidUser;
+    }
+
+    /**
+     * @param bool $isValidUser
+     */
+    public function setIsValidUser(bool $isValidUser): void
+    {
+        $this->isValidUser = $isValidUser;
+    }
+
+    /**
+     * @return User
+     */
+    public function getClient(): User
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param User $client
+     */
+    public function setClient(User $client): void
+    {
+        $this->client = $client;
+    }
+
+
 }
