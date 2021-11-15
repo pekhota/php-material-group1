@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 /**
  * @property $id
  * @property $title

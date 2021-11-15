@@ -1,5 +1,10 @@
 <?php
 
+namespace Framework;
+use Framework\ServiceProviders\ServiceProviderInterface;
+use Framework\ServiceProviders\ConfigServiceProvider;
+use Framework\ServiceProviders\DatabaseServiceProvider;
+
 class Application
 {
     private array $container;
@@ -73,24 +78,31 @@ class Application
 
                     list($handlerClass, $handlerMethod) = explode("😋", $handler);
 
-                    $callableClass = new $handlerClass($this);
+                    $callableObj = new $handlerClass($this);
 
                     $funcParams = array_splice($matches, 1);
 
                     try {
                         /** @var Response $response */
-                        $response = call_user_func_array([$callableClass, $handlerMethod], $funcParams);
-                    } catch (ValidateException $e) {
+                        $response = call_user_func_array([$callableObj, $handlerMethod], $funcParams);
+                    } catch (\ValidateException $e) {
                         // 400 validation error с определеным стилем страницы
                         echo $e->getMessage();
                         die();
-                    } catch (PDOException $e) {
+                    } catch (\PDOException $e) {
                         // 500 ошибка сервера
                         echo $e->getMessage();
                         die();
                     }
 
                     $response->setLayoutPath($this->get("config")->get('app.layout'));
+
+                    if (property_exists($callableObj, "layout")) {
+                        if (!empty($callableObj->layout)) {
+                            $response->setLayoutPath($callableObj->layout);
+                        }
+                    }
+
                     return $response;
                 }
             }

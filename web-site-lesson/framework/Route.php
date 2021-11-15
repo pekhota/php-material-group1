@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Framework;
+
 class Route
 {
     public const HTTP_GET = "GET";

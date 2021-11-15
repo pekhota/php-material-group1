@@ -1,0 +1,20 @@
+{
+    "name": "alex/web-site-lesson",
+    "description": "Some description for our the best website",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Alexander Pekhota",
+            "email": "alex@pdffiller.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Framework\\" : "framework/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.4"
+    }
+}
