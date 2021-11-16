@@ -5,4 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: michaelw90/PHP-Lint@master
+      - uses: overtrue/phplint@8.0
+        with:
+          path: .
+          options: --exclude=*.log
