@@ -30,6 +30,14 @@ class Application
         return self::$app;
     }
 
+    /**
+     * @return array
+     */
+    public function getContainer(): array
+    {
+        return $this->container;
+    }
+
     public function add(string $name, $dependency) {
         $this->container[$name] = $dependency;
     }
