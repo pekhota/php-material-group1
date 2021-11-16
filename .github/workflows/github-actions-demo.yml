@@ -15,3 +15,10 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  PHPLINT:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: overtrue/phplint@8.0
+        with:
+          path: .
+          options: --exclude=*.log
