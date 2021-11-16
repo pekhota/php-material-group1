@@ -13,11 +13,12 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}
+          ls -la ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  PHPLINT:
-    runs-on: ubuntu-20.04
+  phplint:
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - uses: overtrue/phplint@8.0
         with:
           path: .
