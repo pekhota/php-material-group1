@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Framework\ServiceProviders;
+use Framework\Config;
+
 class ConfigServiceProvider extends BaseServiceProvider implements ServiceProviderInterface
 {
     public const NAME = "config";
     public function register()
     {
-        $path = Config::$configPath;
+        $path = \Framework\Config::$configPath;
         $files = array_diff(scandir($path), ['.', '..']);
 
         $configArr = [];

@@ -1,5 +1,10 @@
 <?php
 
+namespace Framework;
+use Framework\ServiceProviders\ServiceProviderInterface;
+use Framework\ServiceProviders\ConfigServiceProvider;
+use Framework\ServiceProviders\DatabaseServiceProvider;
+
 class Application
 {
     private array $container;
@@ -23,6 +28,14 @@ class Application
 
     public static function getApp() {
         return self::$app;
+    }
+
+    /**
+     * @return array
+     */
+    public function getContainer(): array
+    {
+        return $this->container;
     }
 
     public function add(string $name, $dependency) {
@@ -74,18 +87,24 @@ class Application
 
                     list($handlerClass, $handlerMethod) = explode("😋", $handler);
 
+<<<<<<< HEAD
                     $callableClass = new $handlerClass($this);
                  
                     $funcParams = array_splice($matches, 1);          
+=======
+                    $callableObj = new $handlerClass($this);
+
+                    $funcParams = array_splice($matches, 1);
+>>>>>>> 344a1d3957e1d49c21e62e3fa79e7d522f7b9e6a
 
                     try {
                         /** @var Response $response */
-                        $response = call_user_func_array([$callableClass, $handlerMethod], $funcParams);
-                    } catch (ValidateException $e) {
+                        $response = call_user_func_array([$callableObj, $handlerMethod], $funcParams);
+                    } catch (\ValidateException $e) {
                         // 400 validation error с определеным стилем страницы
                         echo $e->getMessage();
                         die();
-                    } catch (PDOException $e) {
+                    } catch (\PDOException $e) {
                         // 500 ошибка сервера
                         echo $e->getMessage();
                         die();
@@ -94,9 +113,21 @@ class Application
                     if($response->LayoutPathisNull()){
                        $response->setLayoutPath($this->get("config")->get('app.layout'));
                     }
+<<<<<<< HEAD
                         
                    
                    
+=======
+
+                    $response->setLayoutPath($this->get("config")->get('app.layout'));
+
+                    if (property_exists($callableObj, "layout")) {
+                        if (!empty($callableObj->layout)) {
+                            $response->setLayoutPath($callableObj->layout);
+                        }
+                    }
+
+>>>>>>> 344a1d3957e1d49c21e62e3fa79e7d522f7b9e6a
                     return $response;
                 }
             }

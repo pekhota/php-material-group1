@@ -18,12 +18,14 @@ try {
     // view -> view
 
 
-    $application = new Application(); // инициализация
-    $response = $application->handle(Request::capture()); // обработка запроса
+    $application = new \Framework\Application(); // инициализация
+    $response = $application->handle(\Framework\Request::capture()); // обработка запроса
     $response->render(); // рендеринг
     $application->terminate(); // gracefull shutdown
 
 } catch (Throwable $e) {
+
+    dd($e);
     $date = date("Y-m-d H:i:s");
     $logStr = sprintf("[%s] %s File: %s, Line: %s".PHP_EOL, $date, $e->getMessage(), $e->getFile(), $e->getLine());
     file_put_contents(__DIR__."/../storage/log.txt", $logStr, FILE_APPEND);

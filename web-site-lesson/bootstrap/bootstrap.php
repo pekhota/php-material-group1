@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+// composer autoload
+require_once __DIR__."/../vendor/autoload.php";
+
 function d($var) {
     echo "<pre>";
     var_dump($var);
@@ -32,31 +35,5 @@ function loadView(string $path, array $params = null) {
     ob_end_clean();
     return $content;
 }
-
-spl_autoload_register(function ($className) {
-
-    if (file_exists(sprintf(__DIR__."/../framework/%s.php", $className))) {
-        require_once sprintf(__DIR__."/../framework/%s.php", $className);
-        return ;
-    }
-
-
-    if (file_exists(sprintf(__DIR__."/../app/controllers/%s.php", $className))) {
-        require_once sprintf(__DIR__."/../app/controllers/%s.php", $className);
-        return ;
-    }
-
-    if (file_exists(sprintf(__DIR__."/../app/models/%s.php", $className))) {
-        require_once sprintf(__DIR__."/../app/models/%s.php", $className);
-        return ;
-    }
-
-    if (file_exists(sprintf(__DIR__."/../framework/ServiceProviders/%s.php", $className))) {
-        require_once sprintf(__DIR__."/../framework/ServiceProviders/%s.php", $className);
-        return ;
-    }
-
-    throw new ClassNotFoundException(sprintf("class %s not found and can't be loaded", $className));
-});
 
 session_start();

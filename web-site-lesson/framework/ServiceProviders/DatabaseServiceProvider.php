@@ -1,5 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Framework\ServiceProviders;
+use Framework\Config;
+use Framework\Database;
+
 class DatabaseServiceProvider extends BaseServiceProvider implements ServiceProviderInterface
 {
     public const NAME = "db";
@@ -16,7 +22,7 @@ class DatabaseServiceProvider extends BaseServiceProvider implements ServiceProv
         $login = $database["login"];
         $pass = $database["password"];
 
-        $dbh = new PDO(sprintf('mysql:host=%s;dbname=%s', $host, $db), $login, $pass);
+        $dbh = new \PDO(sprintf('mysql:host=%s;dbname=%s', $host, $db), $login, $pass);
         $db = new Database($dbh);
         $this->app->add(self::NAME, $db);
     }
