@@ -25,10 +25,6 @@
         });
     }
 
-    $(document).ajaxError(function(event,xhr,options,exc) {
-        alert("something went wrong")
-    })
-
     function refreshTicker() {
         loadFromServer()
     }
@@ -37,8 +33,6 @@
         elem = $( "#table" )
 
         setInterval(loadFromServer, 5000)
-        loadFromServer();
+        cb();
     });
-
-
 </script>

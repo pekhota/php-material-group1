@@ -36,4 +36,24 @@ class MainController extends AbstractController
         $this->layout = "some other layout";
         return $r;
     }
+
+    public function ticker2() {
+        $isJson = false;
+        $client = new \GuzzleHttp\Client();
+        /** @var \GuzzleHttp\Psr7\Response $response */
+        $response = $client->get("https://blockchain.info/ticker");
+
+        if ($isJson) {
+            $phpArr = json_decode($response->getBody()->getContents(), true);
+            $content = loadView(__DIR__."/../../app/views/ticker.php", [
+                'ticker' => $phpArr
+            ]);
+            echo $content;
+        } else {
+            header('Content-Type: application/json; charset=utf-8');
+            echo $response->getBody()->getContents();
+        }
+
+        die();
+    }
 }

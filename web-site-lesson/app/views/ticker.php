@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <td>
-                Currency
+                Currency <?=time()?>
             </td>
             <td>
                 Price

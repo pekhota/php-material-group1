@@ -11,5 +11,6 @@ Framework\Route::get("/^\/$/", App\Controllers\MainController::class."😋index"
 Framework\Route::get("/^\/news$/", App\Controllers\NewsController::class."😋index");
 Framework\Route::get("/^\/news\/(\d+)$/", App\Controllers\NewsController::class."😋get");
 Framework\Route::get("/^\/ticker$/", App\Controllers\MainController::class."😋ticker");
+Framework\Route::get("/^\/ticker2$/", App\Controllers\MainController::class."😋ticker2");
 //Route::post("/^\/news$/", NewsController::class."😋post");
 
