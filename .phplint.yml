@@ -1,0 +1,12 @@
+path: ./
+jobs: 10
+cache: build/phplint.cache
+extensions:
+  - php
+exclude:
+  - vendor
+  - homework
+  - lecture-content
+  - my_test
+  - syntax
+warning: false
