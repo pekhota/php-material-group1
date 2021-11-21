@@ -2,10 +2,17 @@
 
 declare(strict_types=1);
 
-function dd($var) {
+// composer autoload
+require_once __DIR__."/../vendor/autoload.php";
+
+function d($var) {
     echo "<pre>";
     var_dump($var);
     echo "</pre>";
+}
+
+function dd($var) {
+    d($var);
     die();
 }
 
