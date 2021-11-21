@@ -8,12 +8,12 @@ const HTTP_POST = "POST";
 Route::get("/^\/$/", MainController::class."😋index");
 
 Route::get("/^\/news$/", NewsController::class."😋index");
-Route::get("/^\/news\/(\d+)$/", NewsController::class."😋get");
-Route::get("/^\/news-delete\/(\d+)$/", NewsController::class."😋delete");
+Route::get("/news\/(\d+)", NewsController::class."😋get");
+Route::get("/news-delete/(\d+)", NewsController::class."😋delete");
 Route::post("/^\/news$/", NewsController::class."😋post");
 
-Route::get("/^\/news-edit\/(\d+)$/", NewsEditController::class."😋get");
-Route::post("/^\/news-update\/(\d+)$/", NewsEditController::class."😋post");
+Route::get("/news-edit/(\d+)", NewsEditController::class."😋get");
+Route::post("/news-update/(\d+)", NewsEditController::class."😋post");
 
 Route::get("/^\/signup-start$/", GateController::class."😋start_register");
 Route::post("/^\/signup-end$/", GateController::class."😋end_register");
