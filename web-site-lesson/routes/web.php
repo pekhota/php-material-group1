@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 const HTTP_GET = "GET";
 const HTTP_POST = "POST";

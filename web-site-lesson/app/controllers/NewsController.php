@@ -1,6 +1,5 @@
 <?php
-
-use JetBrains\PhpStorm\NoReturn;
+declare(strict_types=1);
 
 final class NewsController extends AbstractController
 {
@@ -25,7 +24,7 @@ final class NewsController extends AbstractController
         $model = News::findByPk($id);
 
         //------------------------------------------------------------------
-        $content = loadView(__DIR__."/../views/view.php", [
+        $content = loadView(__DIR__ . "/../views/view.php", [
             'news' => $model
         ]);
         //------------------------------------------------------------------
@@ -38,7 +37,8 @@ final class NewsController extends AbstractController
     /**
      * @throws ValidateException
      */
-    #[NoReturn] public function post() {
+    public function post()
+    {
 
         /** @var Request $request */
         $request = $this->app->get('request');
@@ -50,18 +50,19 @@ final class NewsController extends AbstractController
         $author = $request->getUser();
         $body = $request->post('fragment');
 
-        News::insert($title,$date,$body,$author);
+        News::insert($title, $date, $body, $author);
 
         // view
         redirect301("/admin");
     }
 
 
-    #[NoReturn] public function delete($id) {
+    public function delete($id)
+    {
         /** @var Request $req */
         $req = $this->app->get("request");
-        $user = User::findByColumn("email",$req->getUser(),new User());
-        if(!$user !== null && $user->isSetAttributes()){
+        $user = User::findByColumn("email", $req->getUser(), new User());
+        if (!$user !== null && $user->isSetAttributes()) {
             News::delete($id);
             redirect301("/admin");
         }

@@ -1,16 +1,16 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
 
 class MasonryController extends AbstractController
 {
-    #[NoReturn] public function index(): Response
+    public function index(): Response
     {
         /** @var Request $req */
         $req = $this->app->get("request");
 
         $email = str_replace('/', '', $req->getPath());;
 
+        /** @var User $user */
         $user = User::findByColumn("email",$email,new User());
 
         if(!$user !== null && $user->isSetAttributes()){

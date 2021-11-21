@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 abstract class AbstractController
 {
     protected Application $app;

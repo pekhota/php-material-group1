@@ -1,6 +1,5 @@
 <?php
-
-use JetBrains\PhpStorm\NoReturn;
+declare(strict_types=1);
 
 abstract class Model
 {
@@ -104,14 +103,12 @@ abstract class Model
 
     public static function findByColumn($column, $param, $model): Model
     {
-        //$model = new static();
         $table = $model->getTable();
         return self::multiplyGet($table, $column, $param, $model);
     }
 
     public static function findByTableAndColumn($table, $column, $param, $model): Model
     {
-        //$model = new static();
         return self::multiplyGet($table, $column, $param, $model);
     }
 

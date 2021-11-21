@@ -23,3 +23,9 @@ jobs:
         with:
           path: .
           options: --exclude=*.log
+  psalm:
+    name: Psalm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2

@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 class DatabaseServiceProvider extends BaseServiceProvider implements ServiceProviderInterface
 {
     public const NAME = "db";

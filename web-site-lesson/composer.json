@@ -3,6 +3,7 @@
     "phpunit/phpunit": "9.5.10"
   },
   "require": {
-    "guzzlehttp/guzzle": "^7.0"
+    "guzzlehttp/guzzle": "^7.0",
+    "vimeo/psalm": "4.13.0"
   }
 }

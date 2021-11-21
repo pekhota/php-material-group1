@@ -1,7 +1,6 @@
 <?php
+declare(strict_types=1);
 
-use JetBrains\PhpStorm\NoReturn;
-use JetBrains\PhpStorm\Pure;
 
 class GateController extends AbstractController
 {
@@ -87,7 +86,7 @@ class GateController extends AbstractController
         }
     }
 
-    #[NoReturn] public function logout()
+    public function logout(): void
     {
         $_SESSION = [];
         redirect301("/");

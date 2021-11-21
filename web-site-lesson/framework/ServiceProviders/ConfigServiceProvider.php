@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 class ConfigServiceProvider extends BaseServiceProvider implements ServiceProviderInterface
 {
     public const NAME = "config";
