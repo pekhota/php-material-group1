@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <psalm>
     <projectFiles>
-        <directory name="web-site-lesson" />
+        <directory name="app" />
+        <directory name="bootstrap" />
+        <directory name="framework" />
+        <directory name="routes" />
     </projectFiles>
 </psalm>
