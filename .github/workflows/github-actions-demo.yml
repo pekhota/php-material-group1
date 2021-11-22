@@ -1,7 +1,7 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-  lint:
+  lint_psalm_phpinsights_snifer:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -27,11 +27,13 @@ jobs:
       - name: Composer Install Dev
         run: |
           composer install
-#          composer check-style
-#          composer fix-style
       - uses: overtrue/phplint@8.0
         with:
           path: .
           options: --exclude=*.log
-      - name: Sniffer job
+      - name: phpinsights job
         run: ./vendor/bin/phpinsights -n
+      - name: Sniffer job
+        run: |
+          composer check-style
+          composer fix-style
