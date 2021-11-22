@@ -1,7 +1,0 @@
-name: PHP lint
-on: [push]
-jobs:
-  php-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - run: ls -la
