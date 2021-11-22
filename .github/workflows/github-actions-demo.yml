@@ -32,8 +32,8 @@ jobs:
           path: .
           options: --exclude=*.log
       - name: phpinsights job
-        run: ./vendor/bin/phpinsights -n
-      - name: Sniffer job
-        run: |
-          composer check-style
-          composer fix-style
+        run: vendor/bin/phpinsights -n --ansi --format=github-action
+#      - name: Sniffer job
+#        run: |
+#          composer check-style
+#          composer fix-style
