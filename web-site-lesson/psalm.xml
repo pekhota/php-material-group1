@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <psalm>
     <projectFiles>
-        <directory name="app" />
+        <directory name="web-site-lesson" />
     </projectFiles>
 </psalm>
