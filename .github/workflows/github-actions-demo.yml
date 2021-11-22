@@ -33,5 +33,4 @@ jobs:
           options: --exclude=*.log
 
       - name: Run psalm
-        run: |
-          ./vendor/bin/psalm --output-format=github
+        run: ./vendor/bin/psalm --output-format=github
