@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
 <psalm>
     <projectFiles>
-        <directory name="app" />
-        <directory name="bootstrap" />
-        <directory name="framework" />
-        <directory name="routes" />
+        <directory name="web-site-lesson" />
+        <ignoreFiles>
+            <directory name="web-site-lesson/config" />
+            <directory name="web-site-lesson/docker" />
+            <directory name="web-site-lesson/html" />
+            <directory name="web-site-lesson/storage" />
+            <directory name="web-site-lesson/test" />
+            <directory name="web-site-lesson/vendor" />
+        </ignoreFiles>
     </projectFiles>
 </psalm>
