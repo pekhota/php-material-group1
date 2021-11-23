@@ -4,4 +4,5 @@
     <config name="installed_paths" value="vendor/slevomat/coding-standard"/>
     <!-- specific sniffs to include -->
     <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/DeclareStrictTypesSniff.php" />
+    <exclude-pattern>*/vendor/*</exclude-pattern>
 </ruleset>
