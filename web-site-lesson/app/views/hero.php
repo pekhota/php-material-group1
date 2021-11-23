@@ -1,6 +1,9 @@
 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-        <img src="https://tickikids.ams3.cdn.digitaloceanspaces.com/z1.cache/gallery/organizations/192/image_5ea01a1065fd20.94960111.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+    <button onclick="refreshTicker()">
+        Refresh table
+    </button>
+    <div id="table" class="col-10 col-sm-8 col-lg-6">
+        table
     </div>
     <div class="col-lg-6">
         <h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
@@ -11,3 +14,31 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    let elem
+
+    function loadFromServer() {
+        $.get( "/ticker2", function( data ) {
+            elem.html( data )
+        });
+    }
+
+    $(document).ajaxError(function(event,xhr,options,exc) {
+        alert("something went wrong")
+    })
+
+    function refreshTicker() {
+        loadFromServer()
+    }
+
+    $( document ).ready(function() {
+        elem = $( "#table" )
+
+        setInterval(loadFromServer, 5000)
+        loadFromServer();
+    });
+
+
+</script>
