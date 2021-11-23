@@ -37,3 +37,4 @@ jobs:
         run: |
           composer check-style
           composer fix-style
+          composer ./vendor/bin/phpcs
