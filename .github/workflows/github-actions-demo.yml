@@ -35,6 +35,7 @@ jobs:
 #        run: vendor/bin/phpinsights -n --ansi --format=github-action
       - name: Sniffer job
         run: |
+          composer ./vendor/bin/phpcbf
           composer check-style
           composer fix-style
-          composer ./vendor/bin/phpcs
+
