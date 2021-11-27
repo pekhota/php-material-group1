@@ -18,6 +18,8 @@ services:
   db:
     image: mariadb
     restart: always
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
     environment:
       MYSQL_DATABASE: step-group1
       MYSQL_ROOT_PASSWORD: example
