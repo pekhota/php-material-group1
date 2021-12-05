@@ -33,6 +33,7 @@ final class NewsController extends AbstractController
         return $r;
     }
 
+    
 
     public function post() {
         /** @var PDO $db */
