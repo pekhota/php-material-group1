@@ -2,70 +2,7 @@
 
 final class MasonryController extends AbstractController
 {
-    
-//     "/masonry" => [
-//         HTTP_GET => [
-
-//             "handler" => function() use ($dbh):string {
-
-//             $masonry = [];
-                        
-//                 foreach($dbh->query('SELECT * from masonry ORDER BY id DESC') as $row) {
-//                     $masonry[] = $row;
-//                 }
-                
-
-//                 return loadView(__DIR__ . "/../app/views/masonry.php", [
-//                     "masonry" => $masonry
-//                 ]);
-        
-//             },
-//         ],
-//         HTTP_POST => [
-//             "handler" => function() use ($dbh) {
-//                 try {
-                
-//                     $title = $_POST["title"] ?: throw new ValidateException("title is empty");
-//                     $image = $_POST["image"] ?: throw new ValidateException("image is empty");                       
-//                     $text = $_POST["text"] ?: throw new ValidateException("text is empty");
-//                     $author = $_SESSION["user"]["email"] ?: throw new ValidateException("author is empty");
-
-//                     $author = strtok($author, '@');
-                    
-//                     $stmt = $dbh->prepare("
-//                         INSERT INTO masonry (title, image, text,autor,data) 
-//                         VALUES (:title, :image, :text, :autor,CURDATE())");
-//                     $stmt->bindParam(':title', $title);
-//                     $stmt->bindParam(':image', $image);
-//                     $stmt->bindParam(':text', $text);
-//                     $stmt->bindParam(':autor', $author);                    
-                               
-
-//                     $stmt->execute();
-                
-                    
-//                    redirect301("/masonry");
-
-//                 } catch (ValidateException $e) {
-//                     echo $e->getMessage();
-//                     die();
-//                 }
-//             }
-//         ]
-//     ],
-
-
-//     "/fillmasonry" => [
-//         HTTP_GET => [
-//             "handler" => function():string {
-//                 return loadView(__DIR__ . "/../app/views/fillmasonry.php");
-//             },                      
-//         ],    
-//     ]
-  
-
-
-// ];
+      
     public function index() {
 
         $result = Masonry::findAll();

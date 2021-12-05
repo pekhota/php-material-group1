@@ -24,11 +24,10 @@ final class NewsController extends AbstractController
         /** @var News $model */
         $model = News::findByPk($id);
 
-        //------------------------------------------------------------------
         $content = loadView(__DIR__."/../views/view.php", [
             'news' => $model
         ]);
-        //------------------------------------------------------------------
+
         $r = new Response($content);
         $r->setTitle("some good title");
         return $r;
@@ -42,13 +41,11 @@ final class NewsController extends AbstractController
         /** @var Request $request */
         $request = $this->app->get('request');
 
-        // validation block
         $title = $request->post('title');
         $date = $request->post('date');
         $author = $request->post('author');
         $body = $request->post('body');
 
-        // business logic
         $stmt = $db->prepare("
                         INSERT INTO news (title, date, author, body) 
                         VALUES (:title, :date, :author, :body)");
@@ -133,7 +130,6 @@ final class NewsController extends AbstractController
 
 
 
-        //$sth->execute(array('title' => $title, 'id' => $id, 'date' => $date, 'author' => $author, 'body' => $body,));
 
         $stmt->execute();
         redirect301('/adminpanel/news');
